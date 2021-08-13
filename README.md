@@ -6,7 +6,7 @@ Feel free to create an issue if I forgot to add something.
 
 And sure you can modify it.
 
-![Screenshot](https://raw.githubusercontent.com/SkyLissh/dotfiles/main/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/SkyLissh/dotfiles/main/.screenshots/screenshot.png)
 
 ## Info
 
@@ -28,3 +28,4 @@ And sure you can modify it.
 - Compositor: Compositor: Jonaburg's fork of [Picom](https://github.com/jonaburg/picom)
 - Lock Screen: [LightDM](https://github.com/canonical/lightdm)
 - Colorscheme: [Lotus](https://github.com/skylissh/lotus-theme-vscode)
+
