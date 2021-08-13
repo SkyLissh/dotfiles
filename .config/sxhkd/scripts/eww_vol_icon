@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+vol=$(pulsemixer --get-volume | awk '{print $1}')
+mute=$(pulsemixer --get-mute)
+
+if [[ $mute == "1" ]]; then
+  echo ""> /tmp/vol-icon
+elif [[ $vol -gt 49 ]]; then 
+  echo "" > /tmp/vol-icon
+elif [[ $vol -gt 5 ]]; then
+  echo "" > /tmp/vol-icon
+else
+  echo "" > /tmp/vol-icon
+fi

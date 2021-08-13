@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -p /tmp/lock_key ] && [ -p /tmp/lock_icon ]; then
+	true
+else
+	mkfifo /tmp/lock_key && echo "$(~/.config/sxhkd/scripts/lockey $1 message)" > /tmp/lock_key
+	mkfifo /tmp/lock_icon && echo "$(~/.config/sxhkd/scripts/lockey $1 icon)" > /tmp/lock_icon
+fi
+
+scrip_name="eww_lockey"
+for pid in $(pgrep -f $scrip_name); do
+	if [ $pid != $$ ]; then
+		kill -9 $pid
+	fi
+done
+
+start=$SECONDS
+value=2
+
+eww_wid="$(xdotool search --name 'Eww - lock_key' || true)"
+
+if [ ! -n "$eww_wid" ]; then
+	eww open lock_key
+	eww_wid="$(xdotool search --name 'Eww - lock_key' || true)"
+fi
+
+echo "$(~/.config/sxhkd/scripts/lockey $1 message)" > /tmp/lock_key
+echo "$(~/.config/sxhkd/scripts/lockey $1 icon)" > /tmp/lock_icon
+
+while [ -n "$eww_wid" ]; do
+	duration=$(( SECONDS - start ))
+	if [[ $duration -gt 1 ]]; then
+		eww close lock_key
+		eww_wid="$(xdotool search --name 'Eww - lock_key' || true)"
+	fi
+	sleep 0.2
+done

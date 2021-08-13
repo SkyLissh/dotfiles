@@ -1,0 +1,14 @@
+# Ignore everything
+/*
+!.gitignore
+!.gitmodules
+
+# Exclude files
+!README.md
+!.xprofile
+!.config
+!.vimrc
+!.ideavimrc
+!.gtkrc-2.0
+!.profile
+!.screenshots

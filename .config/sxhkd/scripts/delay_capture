@@ -1,0 +1,7 @@
+#!/bin/bash
+
+icon_path="/usr/share/icons/Fluent-pink/scalable/apps/camera.svg"
+
+notify-send -u normal -a Screenshot -i $icon_path "Take Screenshot in $1"
+escrotum -d $1 -C
+notify-send -u normal -a Screenshot -i $icon_path "Copied to clipboard!"

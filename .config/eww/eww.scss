@@ -1,0 +1,161 @@
+$bg: rgba(34, 34, 34, 0.7);
+$dark-bg: #121212;
+$fg: #fcfcfa;
+$accent: #ff6188;
+
+$font: "Roboto", sans-serif;
+$icons: "Feather";
+
+* {
+	all: unset;
+}
+
+window {
+	background-color: $bg;
+	color: $fg;
+	font-family: $font;
+	font-weight: bold;
+	font-size: 1.2rem;
+
+	border-radius: 8px;
+}
+
+/* Buttons */
+.button {
+	padding: 1px;
+
+	font-size: 1.8rem;
+	font-family: $icons;
+
+	transition: color 0.3s ease-in;
+
+	border-radius: 8px;
+}
+.button:hover {
+	color: $accent;
+}
+
+.profile,
+.date,
+.player {
+	background-color: $bg;
+}
+
+.pfp {
+	background-image: url("./profile.jpg");
+	background-size: 100px;
+
+	margin: 25px 105px 0 105px;
+
+	border-radius: 100%;
+}
+
+.username {
+	margin-top: -45px;
+
+	font-size: 20px;
+	font-weight: bold;
+
+	color: $fg;
+}
+
+.time {
+	margin: 15px 65px -20px 65px;
+
+	font-size: 50px;
+}
+
+.colon {
+	margin: 0;
+	margin-top: -10px;
+
+	color: $fg;
+}
+
+.day {
+	margin-top: 25px;
+	margin-bottom: 20px;
+
+	font-size: 16px;
+	font-weight: bold;
+	color: $fg;
+}
+
+.song__data {
+	margin: 25px 0px 0px -35px;
+
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.song__art {
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	margin: 13px 53px 12px 17px;
+
+	border-radius: 10px;
+}
+
+.song__title {
+	font-size: 13px;
+	font-weight: 600;
+
+	padding-right: 30px;
+}
+
+.button__player {
+	margin-top: -5px;
+	padding: 25px 25px 5px;
+}
+
+.button__player button {
+	color: $fg;
+
+	font-family: $icons;
+	font-size: 2rem;
+	font-weight: normal;
+	padding-right: 30px;
+}
+
+// .button_play-pause {
+// 	font-size: 11px;
+// }
+
+/* Powermenu */
+.powermenu {
+	border: 3px solid $accent;
+	border-radius: 8px;
+}
+
+/* Popup */
+.popup {
+	padding: 0 2rem;
+}
+
+.popup__icon {
+	margin: 0 1rem;
+
+	font-family: $icons;
+	font-size: 2rem;
+	font-weight: normal;
+}
+
+.popup__content {
+	margin: 0 1rem;
+}
+
+.popup__scale {
+	trough {
+		min-height: 4px;
+		min-width: 220px;
+
+		background-color: $dark-bg;
+		border-radius: 50px;
+
+		highlight {
+			background-color: $accent;
+			border-radius: 10px;
+		}
+	}
+}

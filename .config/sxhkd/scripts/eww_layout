@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+layout=$(~/.config/sxhkd/scripts/layout)
+
+if [ -p /tmp/layout ]; then
+	true
+else
+	mkfifo /tmp/layout && echo "$(~/.config/sxhkd/scripts/layout)" > /tmp/layout
+fi
+
+script_name="eww_layout"
+for pid in $(pgrep -f $script_name); do
+	if [ $pid != $$ ]; then
+		kill -9 $pid
+	fi
+done
+
+start=$SECONDS
+value=2
+
+eww_wid="$(xdotool search --name 'Eww - layout' || true)"
+
+if [ ! -n "$eww_wid" ]; then
+	eww open layout
+	eww_wid="$(xdotool search --name 'Eww - layout' || true)"
+fi
+
+case $layout in
+	"English")
+		setxkbmap es
+		;;
+	"Spanish")
+		setxkbmap us
+		;;
+esac
+
+echo "$(~/.config/sxhkd/scripts/layout)" > /tmp/layout
+
+while [ -n "$eww_wid" ]; do
+	duration=$(( SECONDS - start ))
+	if [[ $duration -gt 1 ]]; then
+		eww close layout
+		eww_wid="$(xdotool search --name 'Eww - layout' || true)"
+	fi
+	sleep 2.0
+done

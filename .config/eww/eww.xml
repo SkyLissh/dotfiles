@@ -1,0 +1,147 @@
+<eww>
+	<definitions>
+		<!-- This is the place where you structure your widgets, align them and stuff. -->
+		
+		<!-- Dashboard -->
+		<def name="profile">
+			<box orientation="v" space-evenly="true">
+				<box class="pfp"/>
+				<box class="username">Alisson</box>
+			</box>
+		</def>
+		<def name="date">
+			<box orientation="v" space-evenly="true">
+				<box orientation="h" class="time">
+					<box class="hour">{{ hour }}</box>
+					<box class="colon">:</box>
+					<box class="minute">{{ minute }}</box>
+				</box>
+				<box class="day">{{ day }}</box>
+			</box>
+		</def>
+		<def name="player">
+			<box orientation="h" space-evenly="true">
+				<box class="song__art" style="background-image: url('{{ art }}')">{{ song_art }}</box>
+				<box class="song__data" orientation="v" space-evenly="false">
+					<box class="song__title">{{ song_title }}</box>
+					<box class="button__player" orientation="h" halign="center">
+						<button onclick="playerctl previous"></button>
+						<button class="button__play-pause" onclick="playerctl play-pause">{{ song_status_icon }}</button>
+            <button onclick="playerctl next"></button>
+					</box>
+				</box>
+			</box>
+		</def>
+		<def name="powermenu">
+			<box orientation="v" space-evenly="true">
+				<button class="button" onclick="~/.config/eww/scripts/powermenu shutdown"></button>
+				<button class="button" onclick="~/.config/eww/scripts/powermenu reboot"></button>
+				<button class="button" onclick="~/.config/eww/scripts/powermenu lock"></button>
+				<button class="button" onclick="~/.config/eww/scripts/powermenu suspend"></button>
+				<button class="button" onclick="~/.config/eww/scripts/powermenu logout"></button>
+			</box>
+		</def>
+
+		<!-- Popups -->
+		<def name="volume">
+			<box class="popup" orientation="h" space-evenly="false" halign="center">
+				<box class="popup__icon">{{ vol_icon }}</box>
+				<scale class="popup__scale" min="0" max="100" active="false" value="{{ vol }}" />
+				<box class="popup__content">{{ vol }}</box>
+			</box>
+		</def>
+		<def name="lock_key">
+			<box class="popup" orientation="h" space-evenly="false" halign="center">
+				<box class="popup__icon">{{ lock_icon }}</box>
+				<box class="popup__content">{{ lock_message }}</box>
+			</box>
+		</def>
+		<def name="layout">
+			<box class="popup" orientation="h" space-evenly="false" halign="center">
+				<box class="popup__icon"></box>
+				<box class="popup__content">Keyboard: {{ layout }}</box>
+			</box>
+		</def>
+
+		<def name="background">
+			<box/>
+		</def>
+	</definitions>
+
+	<variables>
+		<!-- Date Vars -->
+		<script-var name="minute" interval="10s">date "+%M"</script-var>
+		<script-var name="hour" interval="5m">date "+%H"</script-var>
+		<script-var name="day" interval="12h">~/.config/eww/scripts/get_day</script-var>
+
+		<!-- Player Vars -->
+		<script-var name="art" interval="5s">~/.config/eww/scripts/echo_song_art</script-var>
+		<script-var name="song_art" interval="5s">~/.config/eww/scripts/get_song_art</script-var>
+    <script-var name="song_title" interval="1s">~/.config/eww/scripts/get_song_title</script-var>
+		<script-var name="song_status_icon" interval="1s">~/.config/eww/scripts/get_song_status</script-var>
+
+		<!-- Volume -->
+		<script-var name="vol_icon">tail -F /tmp/vol-icon</script-var>
+		<script-var name="vol">tail -F /tmp/vol</script-var>
+
+		<!-- Keyboard -->
+		<script-var name="lock_message">tail -F /tmp/lock_key</script-var>
+		<script-var name="lock_icon">tail -F /tmp/lock_icon</script-var>
+		<script-var name="layout">tail -F /tmp/layout</script-var>
+	</variables>
+
+	<windows>
+		<window name="background">
+			<geometry x="0" y="0" width="100%" height="100%"/>
+			<widget>
+				<background/>
+			</widget>
+		</window>
+
+		<!-- Dashboard -->
+		<window name="player">
+			<geometry x="955px" y="590px" width="316px" height="110px"/>
+			<widget>
+				<player/>
+			</widget>
+		</window>
+		<window name="profile">
+			<geometry x="633px" y="450px" width="310px" height="251px"/>
+			<widget>
+				<profile/>
+			</widget>
+		</window>
+		<window name="date">
+			<geometry x="955px" y="450" width="310px" height="110px"/>
+			<widget>
+				<date/>
+			</widget>
+		</window>
+		<window name="powermenu">
+			<geometry width="100px" height="500px" />
+			<widget>
+				<powermenu/>
+			</widget>
+		</window>
+
+		<!-- Popups -->
+		<window name="volume">
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<widget>
+				<volume/>
+			</widget>
+		</window>
+		<window name="lock_key">
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<widget>
+				<lock_key/>
+			</widget>
+		</window>
+		<window name="layout">
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<widget>
+				<layout/>
+			</widget>
+		</window>
+	</windows>
+</eww>

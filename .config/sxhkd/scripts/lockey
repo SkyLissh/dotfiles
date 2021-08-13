@@ -1,0 +1,33 @@
+#!/bin/bash
+sleep .2
+
+case $1 in
+    'num')
+        mask=2
+        key="Num"
+        ;;
+    'caps')
+        mask=1
+        key="Caps"
+        ;;
+esac
+
+value="$(xset q | grep 'LED mask' | awk '{ print $NF }')"
+
+if [ $(( 0x$value & 0x$mask )) == $mask ]
+then
+    icon=" "
+    message="$key lock is on"
+else
+    icon=" "
+    message="$key lock is off"
+fi
+
+case $2 in
+    "icon")
+        echo $icon
+        ;;
+    "message")
+        echo $message
+        ;;
+esac

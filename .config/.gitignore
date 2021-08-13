@@ -1,0 +1,21 @@
+# Ignore everything
+/*
+!.gitignore
+
+# Exclude files
+!bspwm
+!dunst
+!eww
+!fish
+!gtk-3.0
+!kitty
+!neofetch
+!nvim
+!picom
+!polybar
+!rofi
+!spicetify
+!starship
+!sxhkd
+!systemd
+!wacom
