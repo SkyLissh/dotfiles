@@ -1,0 +1,8 @@
+# Ignore everything
+/*
+!.gitignore
+!.gitmodules
+
+# Exclude files
+!dunst_logger.sh
+!rofi_notify_center.sh
