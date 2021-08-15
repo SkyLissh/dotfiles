@@ -1,159 +1,118 @@
 configuration {
-	display-drun:    							" Apps";
-	display-window:  							"缾 Windows";
-	show-icons:true;
-	font: 												"Roboto Regular 10";
+	display-drun:    								" Apps";
+	display-window:  								"缾 Windows";
+	show-icons:         						true;
+	font: 													"Roboto Regular 10";
+	sidebar-mode: 									false;
+	fullscreen: 										false;
+	hide-scrollbar: 								true;
 }
 
 * {
-	background-color:            #222222d0;
-  bg:                          #00000000;
-	text-color:                  #fcfcfa;
-	selbg:                       #fcfcfa;
-	actbg:                       #121212;
-	urgbg:                       #ff6188;
+	background:            					#222222d0;
+  background-color:              	#00000000;
+	text-color:                  		#fcfcfaee;
+	background-sel:               	#121212;
+	accent:                       	#ff6188;
 
-	selected-normal-foreground:  @text-color;
-	normal-foreground:           @text-color;
-	selected-normal-background:  @actbg;
-	normal-background:           @background-color;
-
-	selected-urgent-foreground:  @urgbg;
-	urgent-foreground:           @text-color;
-	selected-urgent-background:  @actbg;
-	urgent-background:           @background-color;
-    urgent-foreground:           @urgbg;
-
-	selected-active-foreground:  @selbg;
-	active-foreground:           @selbg;
-	selected-active-background:  @actbg;
-	active-background:           @background-color;
-
-	line-margin:                 5;
-	line-padding:                5;
-	separator-style:             "none";
+	line-margin:                 2;
+	line-padding:                2;
 	hide-scrollbar:              "true";
 	margin:                      0;
-	padding:                     10;
 }
 
 window {
-	transparency:                 "real";
-	location:	 										northeast;
-	anchor:		 										northeast;
-	height:		 										93%;
-  y-offset:    									6%;
-  x-offset:    									-14px;
-	width:		 										25%;
-	orientation: 									horizontal;
-	children:	 										[mainbox];
-  border-radius: 								8px;
-	background-color:							@background-color;
+	transparency:                 	"real";
+	background-color:             	@background;	
+	text-color: 										@foreground;
+	border: 												0px;	
+	border-colors: 									@border;
+	border-radius: 									8px;
+	width: 													20%;
+	height: 												48%;
+	location: 											northeast;
+	y-offset: 											6%;
+	x-offset: 											-14px;
+	padding: 												10;
+	anchor:		 											northeast;
+	orientation: 										horizontal;
+
+}
+
+prompt {
+	padding:     									20px 0 0 25px;
+	font:        									"Roboto Bold 15";
+	background-color:							@background-alt;
+	text-color: 									@foreground;
+}
+
+entry {
+	expand:         							true;
+	vertical-align: 							0;
+	padding:        							0px 0px 0px 20px;
+  enabled:        							false;
+	background-color:							@background-alt;
+	text-color:     							@foreground;
+}
+
+inputbar {
+	padding: 											5px;
+	spacing: 											5px;
+	background-color:							@background-alt;
+}
+
+listview {
+	padding: 											10px 1em;
+	spacing: 											0.5em;
+	dynamic: 											true;
+	cycle:   											false;
+	background-color:							@background-alt;
 }
 
 mainbox {
 	spacing:  										0.8em;
   orientation: 									vertical;
 	children: 										[ inputbar, listview ];
-	background-color:							@bg;
+	background-color:							@background-alt;
+}
+
+element {
+	padding:                     	10;
+	background-color:							@background-alt;
+	text-color: 									@foreground;
+}
+
+element-icon {
+	padding: 											10px 20px 10px 10px;
+	background-color:							@background-alt;
+	size: 												56px;
+  vertical-align:                 0.5;
+}
+
+element-text {
+  vertical-align:                 0.5;
+}
+
+element selected {
+	background-color:							@background-sel;
+	text-color:                   @foreground;
+	border-radius:    						6px;
 }
 
 button { padding: 5px 2px; }
 
 button selected {
-	background-color: 						@active-background;
-	text-color:       						@bg;
-}
-
-inputbar {
-	padding: 											5px;
-	spacing: 											5px;
-	background-color:							@bg;
-}
-
-listview {
-	spacing: 											0.5em;
-	dynamic: 											true;
-	cycle:   											false;
-	background-color:							@bg;
-}
-
-element {
-  padding: 											5px;
-	background-color:							@bg;
-}
-
-prompt {
-  padding:     									10px 20px 20px 25px;
-  font:        									"Roboto Bold 15";
-	background-color:							@bg;
-}
-
-entry {
-	expand:         true;
-	text-color:     @normal-foreground;
-	vertical-align: 0;
-	padding:        5px 0px 0px 20px;
-    enabled:        false;
-	background-color:							@bg;
-}
-
-element normal.normal {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @normal-foreground;
-}
-
-element normal.urgent {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @urgent-foreground;
-}
-
-element normal.active {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @active-foreground;
-}
-
-element selected.normal {
-	background-color: @selected-normal-background;
-	text-color:       @selected-normal-foreground;
+	background-color: 						@background-sel;
+	text-color:       						@foreground;
+	padding:                     	10;
 }
 
 element selected.urgent {
-	background-color: @selected-urgent-background;
-	text-color:       @selected-urgent-foreground;
-}
-
-element selected.active {
-	background-color: @selected-active-background;
-	text-color:       @selected-active-foreground;
-}
-
-element alternate.normal {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @normal-foreground;
+	background-color: 						@accent;
 }
 
 element alternate.urgent {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @urgent-foreground;
-}
-
-element alternate.active {
-	background-color: @bg;
-    border-radius:    8px;
-	text-color:       @active-foreground;
-}
-element-icon {
-	background-color:							@bg;
-	size: 7ch;
-}
-element.selected {
-    border-radius: 8px;
-	border:           0 0 0 5px solid;
-	background-color:							@bg;
+	background-color: 						@background-alt;
+  border-radius:    						8px;
+	text-color:       						@accent;
 }

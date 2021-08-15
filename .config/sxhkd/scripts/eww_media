@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 if [ -p /tmp/vol ] && [ -p /tmp/vol-icon ]; then
     true
@@ -8,6 +8,7 @@ else
     mkfifo /tmp/vol-icon && ~/.config/sxhkd/scripts/eww_vol_icon
 fi
 
+current_player=$(playerctl status)
 script_name="eww_vol"
 for pid in $(pgrep -f $script_name); do
     if [ $pid != $$ ]; then
@@ -23,9 +24,11 @@ player_wid="$(xdotool search --name 'Eww - player' || true)"
 
 if [ ! -n "$volume_wid" ] && [ ! -n "$player_wid" ]; then
     eww open volume
-    eww open player
-    volume_wid="$(xdotool search --name 'Eww - volume' || true)"
+    if [ -n "$current_player" ]; then
+        eww open player
+    fi
     player_wid="$(xdotool search --name 'Eww - player' || true)"
+    volume_wid="$(xdotool search --name 'Eww - volume' || true)"
 fi
 
 case $1 in
@@ -61,9 +64,12 @@ while [ -n "$volume_wid" ]; do
     duration=$(( SECONDS - start ))
     if [[ $duration -gt 2 ]]; then
         eww close volume
-        eww close player
-        volume_wid="$(xdotool search --name 'Eww - volume' || true)"       
+        if [ -n "$current_player" ]; then
+
+            eww close player
+        fi
         player_wid="$(xdotool search --name 'Eww - player' || true)"
+        volume_wid="$(xdotool search --name 'Eww - volume' || true)"       
     fi
-    sleep 0.2
+    sleep 0.3
 done
