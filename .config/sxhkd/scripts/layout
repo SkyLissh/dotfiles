@@ -2,8 +2,8 @@
 
 layout=$(setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}')
 
-if [ $layout == "us" ]; then
+if [ $layout = "us" ]; then
 	echo "English"
-elif [ $layout == "es" ]; then
+elif [ $layout = "es" ]; then
 	echo "Spanish"
 fi

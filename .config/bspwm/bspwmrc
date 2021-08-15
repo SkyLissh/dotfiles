@@ -25,6 +25,7 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Thunar state=floating
 bspc rule -a dolphin state=floating
+bspc rule -a kitty state=floating
 bspc rule -a "spotify" state=floating
 
 # Kill if already running

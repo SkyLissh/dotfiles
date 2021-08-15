@@ -8,24 +8,26 @@
 
 # NOTE: The official spotify client does not provide the track position or shuffle status through playerctl. This does work through spotifyd however.
 
-if ps -C spotify > /dev/null; then
-    PLAYER="spotify"
-fi
+# if ps -C spotify > /dev/null; then
+#     PLAYER="spotify"
+# fi
 
-if [ -z "$PLAYER" ]; then
-    printf ""
-fi
+# if [ -z "$PLAYER" ]; then
+#     printf ""
+# fi
 
-if [ "$PLAYER" = "spotify" ]; then
-    STATUS=$(playerctl -p spotify status)
+# if [ "$PLAYER" = "spotify" ]; then
+    STATUS=$(playerctl status)
 
     if [ "$STATUS" = "Playing" ]; then
-        STATUS=""
+        STATUS=""
     else
-        STATUS=""
+        STATUS=""
     fi
 
-    if [ "$PLAYER" = "spotify" ]; then
-        printf "$STATUS"
-    fi
-fi
+    # if [ "$PLAYER" = "spotify" ]; then
+    #     printf "$STATUS"
+    # fi
+
+    echo $STATUS
+# fi

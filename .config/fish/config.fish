@@ -7,6 +7,7 @@ alias cat "ccat -G Plaintext="blink" -G Keyword="purple" -G String="darkgreen" -
 alias ls "exa --group-directories-first"
 alias tree "exa -T"
 alias startserver "browser-sync start --server --files ."
+# alias set_nameserver "sudo echo 'namserver 192.168.56.1' > /etc/resolv.conf"
 
 # Agnoster
 

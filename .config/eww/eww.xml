@@ -19,19 +19,7 @@
 				<box class="day">{{ day }}</box>
 			</box>
 		</def>
-		<def name="player">
-			<box orientation="h" space-evenly="true">
-				<box class="song__art" style="background-image: url('{{ art }}')">{{ song_art }}</box>
-				<box class="song__data" orientation="v" space-evenly="false">
-					<box class="song__title">{{ song_title }}</box>
-					<box class="button__player" orientation="h" halign="center">
-						<button onclick="playerctl previous"></button>
-						<button class="button__play-pause" onclick="playerctl play-pause">{{ song_status_icon }}</button>
-            <button onclick="playerctl next"></button>
-					</box>
-				</box>
-			</box>
-		</def>
+		
 		<def name="powermenu">
 			<box orientation="v" space-evenly="true">
 				<button class="button" onclick="~/.config/eww/scripts/powermenu shutdown"></button>
@@ -48,6 +36,32 @@
 				<box class="popup__icon">{{ vol_icon }}</box>
 				<scale class="popup__scale" min="0" max="100" active="false" value="{{ vol }}" />
 				<box class="popup__content">{{ vol }}</box>
+			</box>
+		</def>
+		<def name="player">
+			<box
+				class="popup popup__player"
+				style="background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0.8), rgba(34, 34, 34, 0.6)), url('{{ art }}')"
+				orientation="v"
+				space-evenly="false"
+			>
+				<box class="player__data"  orientation="h" space-evenly="true">
+					<box class="player__info" orientation="v" space-evenly="false">
+						<box class="player__title" halign="start">{{ player_title }}</box>
+						<box class="player__artist" halign="start">{{ player_artist }}</box>
+					</box>
+					<box
+						class="player__art"
+						style="background-image: url('{{ art }}')"
+					>
+						{{ player_art }}
+					</box>
+				</box>
+				<box class="player__status" orientation="h" space-evenly="false" halign="center">
+					<button class="button button__fab" onclick="playerctl previous"></button>
+					<button class="button button__fab" onclick="playerctl play-pause">{{ player_status_icon }}</button>
+					<button class="button button__fab" onclick="playerctl next"></button>
+				</box>
 			</box>
 		</def>
 		<def name="lock_key">
@@ -75,10 +89,11 @@
 		<script-var name="day" interval="12h">~/.config/eww/scripts/get_day</script-var>
 
 		<!-- Player Vars -->
-		<script-var name="art" interval="5s">~/.config/eww/scripts/echo_song_art</script-var>
-		<script-var name="song_art" interval="5s">~/.config/eww/scripts/get_song_art</script-var>
-    <script-var name="song_title" interval="1s">~/.config/eww/scripts/get_song_title</script-var>
-		<script-var name="song_status_icon" interval="1s">~/.config/eww/scripts/get_song_status</script-var>
+		<script-var name="art" interval="500ms">~/.config/eww/scripts/echo_song_art</script-var>
+		<script-var name="player_art" interval="1s">~/.config/eww/scripts/get_song_art</script-var>
+    <script-var name="player_title" interval="1s">~/.config/eww/scripts/get_song_title</script-var>
+    <script-var name="player_artist" interval="1s">~/.config/eww/scripts/get_song_artist</script-var>
+		<script-var name="player_status_icon" interval="500ms">~/.config/eww/scripts/get_song_status</script-var>
 
 		<!-- Volume -->
 		<script-var name="vol_icon">tail -F /tmp/vol-icon</script-var>
@@ -99,12 +114,6 @@
 		</window>
 
 		<!-- Dashboard -->
-		<window name="player">
-			<geometry x="955px" y="590px" width="316px" height="110px"/>
-			<widget>
-				<player/>
-			</widget>
-		</window>
 		<window name="profile">
 			<geometry x="633px" y="450px" width="310px" height="251px"/>
 			<widget>
@@ -129,6 +138,12 @@
 			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
 			<widget>
 				<volume/>
+			</widget>
+		</window>
+		<window name="player">
+			<geometry width="20%" height="24%" x="14px" y="13%" anchor="top left"/>
+			<widget>
+				<player/>
 			</widget>
 		</window>
 		<window name="lock_key">

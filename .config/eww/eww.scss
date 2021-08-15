@@ -22,10 +22,11 @@ window {
 
 /* Buttons */
 .button {
-	padding: 1px;
+	padding: 0.8rem;
 
-	font-size: 1.8rem;
 	font-family: $icons;
+	font-weight: normal;
+	font-size: 1.5rem;
 
 	transition: color 0.3s ease-in;
 
@@ -35,10 +36,11 @@ window {
 	color: $accent;
 }
 
-.profile,
-.date,
-.player {
+.button__fab {
+	margin: 0 1rem;
+
 	background-color: $bg;
+	border-radius: 50%;
 }
 
 .pfp {
@@ -81,41 +83,9 @@ window {
 	color: $fg;
 }
 
-.song__data {
-	margin: 25px 0px 0px -35px;
-
-	font-size: 12px;
-	font-weight: bold;
-}
-
-.song__art {
-	background-size: cover;
-	background-repeat: no-repeat;
-
-	margin: 13px 53px 12px 17px;
-
-	border-radius: 10px;
-}
-
-.song__title {
-	font-size: 13px;
-	font-weight: 600;
-
-	padding-right: 30px;
-}
-
 .button__player {
-	margin-top: -5px;
-	padding: 25px 25px 5px;
-}
-
-.button__player button {
-	color: $fg;
-
-	font-family: $icons;
-	font-size: 2rem;
-	font-weight: normal;
-	padding-right: 30px;
+	// margin-top: -5px;
+	// padding: 25px 25px 5px;
 }
 
 // .button_play-pause {
@@ -131,6 +101,14 @@ window {
 /* Popup */
 .popup {
 	padding: 0 2rem;
+}
+
+.popup__player {
+	padding: 1.5rem;
+
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .popup__icon {
@@ -158,4 +136,26 @@ window {
 			border-radius: 10px;
 		}
 	}
+}
+
+/* Popup Player */
+.player__data {
+	min-height: 7rem;
+}
+
+.player__artist {
+	font-size: 1rem;
+	font-weight: normal;
+}
+
+.player__art {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	border-radius: 8px;
+}
+
+.player__status {
+	margin-top: 3rem;
 }

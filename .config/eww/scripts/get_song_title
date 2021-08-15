@@ -5,11 +5,11 @@ count=$(echo -n "$title" | wc -c)
 if [ -z "$title" ]; then
 	echo "Not Playing";
 else
-	if [ "$count" -le 20 ]; then
+	if [ "$count" -le 18 ]; then
         echo $title
 	else
 		if [[ "$title" =~ [^\x00-\x7F] ]]; then
-			echo $(playerctl metadata --format '{{ title }} ' | awk '{ print substr($0, 1, 10) }')...
+			echo $(playerctl metadata --format '{{ title }} ' | awk '{ print substr($0, 1, 18) }')...
         elif [[ "$title" -le 15 ]]; then
             echo $(playerctl metadata --format '{{ title }} ' | awk '{print $1, $2}')
         else

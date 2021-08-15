@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + {_,shift + } Return
-	{kitty, bspc rule -a \* -o state=floating && kitty}
+	{bspc rule -a \* -o state=tiled && kitty, kitty}
 
 # program launcher
 super + i
@@ -19,7 +19,8 @@ super + b
 	firefox
 
 super + e
-	bspc rule -a \* -o state=floating && dolphin
+	dolphin
+	# bspc rule -a \* -o state=floating && dolphin
 
 super + p
 	escrotum -C && notify-send -u normal -a Screenshot -i /usr/share/icons/Fluent-pink/scalable/apps/camera.svg "Copied to clipboard!"
@@ -60,17 +61,23 @@ Num_Lock
 
 # audio
 XF86AudioLowerVolume
-	~/.config/sxhkd/scripts/eww_vol down
+	~/.config/sxhkd/scripts/eww_media down
 
 XF86AudioRaiseVolume
-	~/.config/sxhkd/scripts/eww_vol up
+	~/.config/sxhkd/scripts/eww_media up
 
 XF86AudioMute
-	~/.config/sxhkd/scripts/eww_vol mute
+	~/.config/sxhkd/scripts/eww_media mute
 
 # media
-XF86Audio{Play, Next, Prev}
-	playerctl {play-pause, next, previous}
+XF86AudioPlay
+	~/.config/sxhkd/scripts/eww_media play-pause
+
+XF86AudioNext
+	~/.config/sxhkd/scripts/eww_media next
+
+XF86AudioPrev
+	~/.config/sxhkd/scripts/eww_media previous
 
 
 #
