@@ -9,7 +9,7 @@ else
         echo $title
 	else
 		if [[ "$title" =~ [^\x00-\x7F] ]]; then
-			echo $(playerctl metadata --format '{{ title }} ' | awk '{ print substr($0, 1, 18) }')...
+			echo $(playerctl metadata --format '{{ title }} ' | awk '{ print substr($0, 1, 12) }')...
         elif [[ "$title" -le 15 ]]; then
             echo $(playerctl metadata --format '{{ title }} ' | awk '{print $1, $2}')
         else

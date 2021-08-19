@@ -1,20 +1,20 @@
-$bg: rgba(34, 34, 34, 0.7);
-$dark-bg: #121212;
+$bg: rgba(34, 34, 34, 0.816);
+$light-bg: #585858;
 $fg: #fcfcfa;
 $accent: #ff6188;
+$accent-alt: #a9dc76;
 
 $font: "Roboto", sans-serif;
 $icons: "Feather";
 
-* {
-	all: unset;
-}
+// * {
+// 	all: unset;
+// }
 
 window {
-	background-color: $bg;
 	color: $fg;
+	background: $bg;
 	font-family: $font;
-	font-weight: bold;
 	font-size: 1.2rem;
 
 	border-radius: 8px;
@@ -25,12 +25,13 @@ window {
 	padding: 0.8rem;
 
 	font-family: $icons;
-	font-weight: normal;
-	font-size: 1.5rem;
+	font-size: 3rem;
 
 	transition: color 0.3s ease-in;
+	background: transparent;
 
 	border-radius: 8px;
+	border: none;
 }
 .button:hover {
 	color: $accent;
@@ -39,58 +40,131 @@ window {
 .button__fab {
 	margin: 0 1rem;
 
-	background-color: $bg;
+	font-size: 1.5rem;
+	background: $bg;
 	border-radius: 50%;
 }
 
-.pfp {
-	background-image: url("./profile.jpg");
-	background-size: 100px;
+/** Dashboard **/
 
-	margin: 25px 105px 0 105px;
+.background__img {
+	background-image: url("./scripts/.wallpaper_blur");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Profile */
+
+.profile {
+	padding: 2rem;
+}
+
+.profile__img {
+	min-height: 10rem;
+
+	background-image: url("~/.pfp");
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	margin: 0 3.5rem;
 
 	border-radius: 100%;
 }
 
-.username {
-	margin-top: -45px;
-
-	font-size: 20px;
-	font-weight: bold;
-
-	color: $fg;
+.profile__info {
+	margin-top: 1rem;
 }
 
+.profile__user {
+	margin-top: 1rem;
+
+	font-size: 2rem;
+}
+.profile__uptime {
+	color: $accent-alt;
+}
+
+/* Mail */
+.mail {
+	font-size: 2rem;
+}
+
+.mail__icon {
+	font-family: $icons;
+	font-size: 3rem;
+}
+
+/* Calendar */
+.calendar {
+	margin: 2rem;
+	padding: 4px 2px 0 2px;
+
+	background: transparent;
+	border: none;
+
+	:selected {
+		background-color: $accent;
+	}
+
+	.header {
+		background: transparent;
+		color: $accent;
+		font-weight: bold;
+	}
+
+	.button {
+		color: $accent;
+	}
+}
+
+/* Time */
 .time {
-	margin: 15px 65px -20px 65px;
-
-	font-size: 50px;
+	font-size: 3rem;
 }
 
-.colon {
+.time__colon {
 	margin: 0;
-	margin-top: -10px;
-
-	color: $fg;
 }
 
-.day {
-	margin-top: 25px;
-	margin-bottom: 20px;
-
-	font-size: 16px;
-	font-weight: bold;
-	color: $fg;
+/* Storage */
+.storage {
+	margin: 2rem 0;
 }
 
-.button__player {
-	// margin-top: -5px;
-	// padding: 25px 25px 5px;
+.storage__name {
+	margin: 0 1rem;
 }
 
-// .button_play-pause {
-// 	font-size: 11px;
-// }
+.storage__free {
+	margin: 0 1rem;
+}
+
+.storage__bar {
+	min-width: 160px;
+
+	trough {
+		background-color: $light-bg;
+
+		progress {
+			background-color: $accent;
+		}
+	}
+}
+
+/* Weather */
+
+.weather__icon {
+	font-size: 7rem;
+}
+
+.weather__temp {
+	font-size: 2.2rem;
+}
+
+.weather__desc {
+	font-size: 1.5rem;
+}
 
 /* Powermenu */
 .powermenu {
@@ -116,11 +190,12 @@ window {
 
 	font-family: $icons;
 	font-size: 2rem;
-	font-weight: normal;
 }
 
 .popup__content {
 	margin: 0 1rem;
+
+	font-weight: bold;
 }
 
 .popup__scale {
@@ -128,7 +203,7 @@ window {
 		min-height: 4px;
 		min-width: 220px;
 
-		background-color: $dark-bg;
+		background-color: $light-bg;
 		border-radius: 50px;
 
 		highlight {
@@ -143,9 +218,12 @@ window {
 	min-height: 7rem;
 }
 
+.player__title {
+	font-weight: bold;
+}
+
 .player__artist {
 	font-size: 1rem;
-	font-weight: normal;
 }
 
 .player__art {

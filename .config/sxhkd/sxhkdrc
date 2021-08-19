@@ -55,6 +55,10 @@ Caps_Lock
 Num_Lock
 	~/.config/sxhkd/scripts/eww_lockey num
 
+# Dashboard
+super + d
+	~/.config/sxhkd/scripts/eww_dashboard
+
 #
 # media hotkeys
 #

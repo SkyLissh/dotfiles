@@ -1,65 +1,117 @@
 <eww>
 	<definitions>
 		<!-- This is the place where you structure your widgets, align them and stuff. -->
-		
+
 		<!-- Dashboard -->
+		<def name="background">
+			<button class="background__img" onclick="~/.config/sxhkd/scripts/eww_dashboard">
+				{{ bg_blur }}
+			</button>
+		</def>
+
 		<def name="profile">
-			<box orientation="v" space-evenly="true">
-				<box class="pfp"/>
-				<box class="username">Alisson</box>
-			</box>
-		</def>
-		<def name="date">
-			<box orientation="v" space-evenly="true">
-				<box orientation="h" class="time">
-					<box class="hour">{{ hour }}</box>
-					<box class="colon">:</box>
-					<box class="minute">{{ minute }}</box>
+			<box class="profile" orientation="v" space-evenly="false" valign="center">
+				<box 
+					class="profile__img" 
+					style="background-image: url('{{ home }}/.pfp')" />
+
+				<box class="profile__info" orientation="v" space-evenly="false">
+					<box class="profile__user">{{ name }}</box>
+					<box class="profile__uptime">{{ uptime }}</box>
 				</box>
-				<box class="day">{{ day }}</box>
 			</box>
 		</def>
-		
-		<def name="powermenu">
-			<box orientation="v" space-evenly="true">
-				<button class="button" onclick="~/.config/eww/scripts/powermenu shutdown"></button>
-				<button class="button" onclick="~/.config/eww/scripts/powermenu reboot"></button>
-				<button class="button" onclick="~/.config/eww/scripts/powermenu lock"></button>
-				<button class="button" onclick="~/.config/eww/scripts/powermenu suspend"></button>
-				<button class="button" onclick="~/.config/eww/scripts/powermenu logout"></button>
+		<def name="mail">
+			<box class="mail" orientation="h" space-evenly="false" halign="center" spacing="20">
+				<box class="mail__icon"></box>
+				<box class="mail__unseen">{{ mail_unseen }}</box>
 			</box>
+		</def>
+		<def name="calendary">
+			<box class="calendar__container">
+				<calendar class="calendar" valign="center" />
+			</box>
+		</def>
+		<def name="time">
+			<box class="time" halign="center">
+				<box class="time__info" valign="center">{{ hour }} : {{ minute }}</box>
+			</box>
+		</def>
+		<def name="storage">
+			<box class="storage" orientation="v">
+				<box class="storage__info" orientation="h">
+					<box class="storage__name" halign="center">/</box>
+					<progress class="storage__bar" value="{{ used_root }}" valign="center" />
+					<box class="storage__free">{{ free_root }}</box>
+				</box>
+				<box class="storage__info" orientation="h">
+					<box class="storage__name" halign="center">/gdrive</box>
+					<progress class="storage__bar" value="{{ used_gdrive }}" valign="center" />
+					<box class="storage__free">{{ free_gdrive }}</box>
+				</box>
+			</box>
+		</def>
+		<def name="weather">
+			<box class="weather" orientation="v" space-evenly="false">
+				<box class="weather__header" orientation="h">
+					<box class="weather__icon">{{ weather_icon }}</box>
+					<box class="weather__temp">{{ weather_temp }}</box>
+				</box>
+				<box class="weather__desc">
+					<box class="weather__stat">{{ weather_stat }}</box>
+				</box>
+			</box>
+		</def>
+
+		<def name="power">
+			<button class="button" onclick="~/.config/eww/scripts/powermenu shutdown"></button>
+		</def>
+		<def name="reboot">
+			<button class="button" onclick="~/.config/eww/scripts/powermenu reboot"></button>
+		</def>
+		<def name="lock">
+			<button class="button" onclick="~/.config/eww/scripts/powermenu lock"></button>
+		</def>
+		<def name="suspend">
+			<button class="button" onclick="~/.config/eww/scripts/powermenu suspend"></button>
+		</def>
+		<def name="logout">
+			<button class="button" onclick="~/.config/eww/scripts/powermenu logout"></button>
 		</def>
 
 		<!-- Popups -->
 		<def name="volume">
 			<box class="popup" orientation="h" space-evenly="false" halign="center">
 				<box class="popup__icon">{{ vol_icon }}</box>
-				<scale class="popup__scale" min="0" max="100" active="false" value="{{ vol }}" />
+				<scale 
+					class="popup__scale" 
+					min="0" 
+					max="100" 
+					value="{{ vol }}" 
+					onchange="amixer -D pulse sset Master {}%" />
 				<box class="popup__content">{{ vol }}</box>
 			</box>
 		</def>
 		<def name="player">
-			<box
+			<box 
 				class="popup popup__player"
 				style="background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0.8), rgba(34, 34, 34, 0.6)), url('{{ art }}')"
-				orientation="v"
-				space-evenly="false"
-			>
-				<box class="player__data"  orientation="h" space-evenly="true">
+				orientation="v" 
+				space-evenly="false">
+				<box class="player__data" orientation="h" space-evenly="true">
 					<box class="player__info" orientation="v" space-evenly="false">
 						<box class="player__title" halign="start">{{ player_title }}</box>
 						<box class="player__artist" halign="start">{{ player_artist }}</box>
 					</box>
-					<box
-						class="player__art"
-						style="background-image: url('{{ art }}')"
-					>
+					<box class="player__art" style="background-image: url('{{ art }}')">
 						{{ player_art }}
 					</box>
 				</box>
 				<box class="player__status" orientation="h" space-evenly="false" halign="center">
 					<button class="button button__fab" onclick="playerctl previous"></button>
-					<button class="button button__fab" onclick="playerctl play-pause">{{ player_status_icon }}</button>
+					<button class="button button__fab" onclick="playerctl play-pause">
+						{{ player_status_icon }}
+					</button>
 					<button class="button button__fab" onclick="playerctl next"></button>
 				</box>
 			</box>
@@ -76,24 +128,64 @@
 				<box class="popup__content">Keyboard: {{ layout }}</box>
 			</box>
 		</def>
-
-		<def name="background">
-			<box/>
-		</def>
 	</definitions>
 
 	<variables>
+		<!-- Background -->
+		<script-var name="bg_blur" interval="20m">
+			~/.config/eww/scripts/blur_wallpaper -i ~/.wallpaper
+		</script-var>
+
+		<!-- Profile Vars -->
+		<var name="name">Alisson Lopez</var>
+		<script-var name="home">echo $HOME</script-var>
+		<script-var name="uptime" interval="30s">uptime -p</script-var>
+
+		<!-- Mail Vars -->
+		<script-var name="mail_unseen">~/.config/eww/scripts/get_mails</script-var>
+
 		<!-- Date Vars -->
 		<script-var name="minute" interval="10s">date "+%M"</script-var>
 		<script-var name="hour" interval="5m">date "+%H"</script-var>
 		<script-var name="day" interval="12h">~/.config/eww/scripts/get_day</script-var>
 
+		<!-- Storage Vars -->
+		<script-var name="free_root">df / --output=avail --block-size=GB</script-var>
+		<script-var name="used_root">
+			df / --output=pcent | awk '{sub(/.*\s/, ""); sub(/%.*/,"");print}'
+		</script-var>
+		<script-var name="free_gdrive">df /gdrive --output=avail --block-size=GB</script-var>
+		<script-var name="used_gdrive">
+			df /gdrive --output=pcent | awk '{sub(/.*\s/, ""); sub(/%.*/,"");print}'
+		</script-var>
+
+		<!-- Weather Vars -->
+		<script-var name="weather_icon" interval="20m">
+			~/.config/eww/scripts/get_weather --icon
+		</script-var>
+		<script-var name="weather_temp" interval="20m">
+			~/.config/eww/scripts/get_weather --temp
+		</script-var>
+		<script-var name="weather_stat" interval="20m">
+			~/.config/eww/scripts/get_weather --stat
+		</script-var>
+
 		<!-- Player Vars -->
-		<script-var name="art" interval="500ms">~/.config/eww/scripts/echo_song_art</script-var>
-		<script-var name="player_art" interval="1s">~/.config/eww/scripts/get_song_art</script-var>
-    <script-var name="player_title" interval="1s">~/.config/eww/scripts/get_song_title</script-var>
-    <script-var name="player_artist" interval="1s">~/.config/eww/scripts/get_song_artist</script-var>
-		<script-var name="player_status_icon" interval="500ms">~/.config/eww/scripts/get_song_status</script-var>
+		<script-var name="art" interval="1s">
+			~/.config/eww/scripts/echo_song_art
+		</script-var>
+		<script-var name="player_art" interval="1s">
+			~/.config/eww/scripts/get_song_art
+		</script-var>
+		<script-var name="player_title" interval="1s">
+			~/.config/eww/scripts/get_song_title
+		</script-var>
+		<script-var name="player_artist" interval="1s">
+			~/.config/eww/scripts/get_song_artist
+		</script-var>
+		<script-var name="player_status_icon" interval="500ms">
+			~/.config/eww/scripts/get_song_status
+		</script-var>
 
 		<!-- Volume -->
 		<script-var name="vol_icon">tail -F /tmp/vol-icon</script-var>
@@ -105,57 +197,105 @@
 		<script-var name="layout">tail -F /tmp/layout</script-var>
 	</variables>
 
+	
+	<!-- Dashboard -->
 	<windows>
 		<window name="background">
-			<geometry x="0" y="0" width="100%" height="100%"/>
+			<geometry x="0" y="0" width="1920px" height="1080px" />
 			<widget>
-				<background/>
+				<background />
 			</widget>
 		</window>
-
-		<!-- Dashboard -->
 		<window name="profile">
-			<geometry x="633px" y="450px" width="310px" height="251px"/>
+			<geometry x="285px" y="250px" width="307px" height="324px" />
 			<widget>
-				<profile/>
+				<profile />
 			</widget>
 		</window>
-		<window name="date">
-			<geometry x="955px" y="450" width="310px" height="110px"/>
+		<window name="mail">
+			<geometry x="285" y="594" width="307px" height="116px" />
 			<widget>
-				<date/>
+				<mail />
 			</widget>
 		</window>
-		<window name="powermenu">
-			<geometry width="100px" height="500px" />
+		<window name="time">
+			<geometry x="612px" y="250px" width="520px" height="96px" />
 			<widget>
-				<powermenu/>
+				<time />
+			</widget>
+		</window>
+		<window name="calendar">
+			<geometry x="612px" y="366px" width="520px" height="344px" />
+			<widget>
+				<calendary />
+			</widget>
+		</window>
+		<window name="weather">
+			<geometry x="1152px" y="250px" width="483px" height="220px" />
+			<widget>
+				<weather />
+			</widget>
+		</window>
+		<window name="storage">
+			<geometry x="1152px" y="490px" width="483px" height="220px" />
+			<widget>
+				<storage />
+			</widget>
+		</window>
+		<window name="power">
+			<geometry x="285px" y="730px" width="254px" height="100px" />
+			<widget>
+				<power />
+			</widget>
+		</window>
+		<window name="reboot">
+			<geometry x="559px" y="730px" width="254px" height="100px" />
+			<widget>
+				<reboot />
+			</widget>
+		</window>
+		<window name="lock">
+			<geometry x="833px" y="730px" width="254px" height="100px" />
+			<widget>
+				<lock />
+			</widget>
+		</window>
+		<window name="suspend">
+			<geometry x="1107px" y="730px" width="254px" height="100px" />
+			<widget>
+				<suspend />
+			</widget>
+		</window>
+		<window name="logout">
+			<geometry x="1381px" y="730px" width="254px" height="100px" />
+			<widget>
+				<logout />
 			</widget>
 		</window>
 
 		<!-- Popups -->
 		<window name="volume">
-			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left" />
 			<widget>
-				<volume/>
+				<volume />
 			</widget>
 		</window>
 		<window name="player">
-			<geometry width="20%" height="24%" x="14px" y="13%" anchor="top left"/>
+			<geometry width="20%" height="24%" x="14px" y="13%" anchor="top left" />
 			<widget>
-				<player/>
+				<player />
 			</widget>
 		</window>
 		<window name="lock_key">
-			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left" />
 			<widget>
-				<lock_key/>
+				<lock_key />
 			</widget>
 		</window>
 		<window name="layout">
-			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left"/>
+			<geometry width="20%" height="6%" x="14px" y="6%" anchor="top left" />
 			<widget>
-				<layout/>
+				<layout />
 			</widget>
 		</window>
 	</windows>

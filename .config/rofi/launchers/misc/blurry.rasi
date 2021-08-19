@@ -23,7 +23,7 @@ configuration {
     background:                     #222222d0;
     background-alt:              	  #00000000;
     background-bar:                 #121212d0;
-    foreground:                     #f2f2f2EE;
+    foreground:                     #fcfcfaEE;
     accent:			            	      #FF6188;
 }
 
@@ -54,6 +54,7 @@ entry {
     placeholder-color:              @foreground;
     expand:                         true;
     horizontal-align:               0;
+	  font:							              "Roboto Bold 12";
     placeholder:                    "Search";
     padding:                        0.10% 0% 0% 0%;
     blink:                          true;
@@ -101,7 +102,7 @@ element {
 }
 
 element-icon {
-    size:                           40px;
+    size:                           42px;
     border:                         0px;
 }
 

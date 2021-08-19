@@ -88,6 +88,8 @@ content = 
 content-foreground = ${colors.primary}
 content-font = 4
 
+click-left = ~/.config/sxhkd/scripts/eww_dashboard
+
 [module/bspwm]
 type = internal/bspwm
 

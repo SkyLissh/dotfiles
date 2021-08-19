@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_name="eww_dashboard"
+for pid in $(pgrep -f $script_name); do
+	if [ $pid != $$ ]; then
+		kill -9 $pid
+	fi
+done
+
+eww_wid="$(xdotool search --name 'Eww - background' || true)"
+
+if [ ! -n "$eww_wid" ]; then
+	eww open background
+	eww open profile && eww open mail
+	eww open time && eww open calendar
+	eww open weather && eww open storage
+	eww open power && eww open reboot && eww open lock && eww open suspend && eww open logout
+else
+	eww close background
+	eww close profile && eww close mail
+	eww close time && eww close calendar
+	eww close weather && eww close storage
+	eww close power && eww close reboot && eww close lock && eww close suspend && eww close logout
+fi
