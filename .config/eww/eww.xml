@@ -142,7 +142,7 @@
 		<script-var name="uptime" interval="30s">uptime -p</script-var>
 
 		<!-- Mail Vars -->
-		<script-var name="mail_unseen">~/.config/eww/scripts/get_mails</script-var>
+		<script-var name="mail_unseen" interval="5m">~/.config/eww/scripts/get_mails</script-var>
 
 		<!-- Date Vars -->
 		<script-var name="minute" interval="10s">date "+%M"</script-var>
